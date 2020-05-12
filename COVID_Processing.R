@@ -51,6 +51,11 @@ Overlake.Clean$`Last Lab Results` <- NULL
 
 SearchVar4 <- "deceased|Deceased"
 Overlake.Age <- tolower(Overlake.Clean$Age)
+source("BabyCalc.R")
+
+
+
+x <- Baby.Age.Calc(35)
 
 #mask for establishing which rows say deceased and setting them to boolean values. attempting to create
 #separate table to work with these values, remove "deceased" and have a table designated for deceased patients
@@ -66,6 +71,7 @@ pats <- "deceased|y.o.|\\)|\\("
 Overlake.Deceased <- Overlake.Clean[Overlake.Clean$Deceased == TRUE, ]
 Overlake.Deceased$Age <-  tolower(Overlake.Deceased$Age)
 Overlake.Deceased$Age <- str_replace_all(Overlake.Deceased$Age, pats, "")
+Overlake.Clean$Age <- str_replace_all(Overlake.Clean$Age, pats, "")
 #set age column to integer variable
 Overlake.Deceased$Age <- as.integer(Overlake.Deceased$Age)
 #Eliminate deceased column as column is redundant
@@ -75,9 +81,9 @@ Overlake.Deceased$Deceased <- NULL
 #In progress 5-5-20
 
 Overlake.Clean$`Unit and Room` <- tolower(Overlake.Clean$`Unit and Room`)
-Overlake.Clean$`Unit and Room` <- str_replace_all(Overlake.Clean$`Unit and Room`, "OHMC", "")
+Overlake.Clean$`Unit and Room` <- str_replace_all(Overlake.Clean$`Unit and Room`, "ohmc", "")
 
-Overlake.Clean$`Unit and Room` <- str_replace_all(Overlake.Clean$`Unit and Room`, "OHMC", "")
+
 
 
 #Exports to a csv file for ease of use in Excel/Tableau with the cleaned overlake data. Last step
